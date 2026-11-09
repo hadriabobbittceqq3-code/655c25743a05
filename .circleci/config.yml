@@ -1,0 +1,1898 @@
+version: 2.1
+
+jobs:
+  Date-Span-Mesh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            set +o pipefail 2>/dev/null; sum_lines() { seq 1 $1 | md5sum ; }; sum_lines 770204 > /tmp/a1/0b7a340a-8014-4d33; true
+            echo "name=artifacts lines=$(wc -l </tmp/a1/0b7a340a-8014-4d33)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '0b7a340a-8014-4d33'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/0b7a340a-8014-4d33 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  hH7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Timestamps trained with no errors
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -1 /etc/default | tac | tr '[:lower:]' '[:upper:]'; true ; } > /tmp/a1/gVtYdY39Io
+            echo "name=APP-446 lines=$(wc -l </tmp/a1/gVtYdY39Io)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'gVtYdY39Io'
+  APP-446:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/gVtYdY39Io 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  heidibot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Wait 120 seconds
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; grep -v daemon /etc/passwd | sort | head -3; true ; } > /tmp/a1/b30f624fc88668b03abc5fa11
+            echo "name=py311-lint lines=$(wc -l </tmp/a1/b30f624fc88668b03abc5fa11)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'b30f624fc88668b03abc5fa11'
+  py311-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/b30f624fc88668b03abc5fa11 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  gradient_ref:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Patch the level to free memory
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls --directory .. | paste -sd ' '; true ; } > /tmp/a1/shimmerbosonstackred
+            echo "name=tb-alt lines=$(wc -l </tmp/a1/shimmerbosonstackred)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'shimmerbosonstackred'
+  tb-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/shimmerbosonstackred 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  hugo-li-cloud:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Seriously accrue the chargebacks this time
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -o -t /usr/lib | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/a1/tenant147
+            echo "name=bob-verify lines=$(wc -l </tmp/a1/tenant147)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'tenant147'
+  bob-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/tenant147 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  inputKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Query the tenant databases first thing
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; set -- dog owl cat whale; for a; do echo "<$a>"; done; true ; } > /tmp/a1/AJd3oT0
+            echo "name=Prepare_Image1 lines=$(wc -l </tmp/a1/AJd3oT0)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'AJd3oT0'
+  Prepare_Image1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  melody85973:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: STEP 18 IMAGING CELL LINES
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; printenv | grep -E "^P"; true ; } > /tmp/a1/964b2dbf81bec5ea842055c92
+            echo "name=xi-push lines=$(wc -l </tmp/a1/964b2dbf81bec5ea842055c92)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '964b2dbf81bec5ea842055c92'
+  xi-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/964b2dbf81bec5ea842055c92 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  planet-377:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: IMPORT PHYSICS LAYERS
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; fallocate -l 100K "/tmp/rig.csv" && ls -lh "/tmp/rig.csv"; true ; } > /tmp/a1/xx_4ddda691c5925a
+            echo "name=wip-parse lines=$(wc -l </tmp/a1/xx_4ddda691c5925a)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'xx_4ddda691c5925a'
+  wip-parse:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/xx_4ddda691c5925a 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  NavWriterGardenTraceEmber:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: The terms of service are healthy
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | grep NAME | sort | awk -F= '{print $2}'; true ; } > /tmp/a1/beamQuickMountain
+            echo "name=all-greens lines=$(wc -l </tmp/a1/beamQuickMountain)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'beamQuickMountain'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/beamQuickMountain 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  bugfix-warning-attach-last:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Wave 018 of 27 hardening
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; diff <(echo 'status: ok') <(echo 'good job') || echo different; true ; } > /tmp/a1/pQho
+            echo "name=fiona-ship lines=$(wc -l </tmp/a1/pQho)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'pQho'
+  fiona-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/pQho 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  address_v2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: so like expand the cookie banner
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; top -b -n 1 -u $(whoami) | head; true ; } > /tmp/a1/iter2_ab27
+            echo "name=RolloutRelease lines=$(wc -l </tmp/a1/iter2_ab27)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'iter2_ab27'
+  RolloutRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  FBYBW-85471a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: aliquot EVERYTHING
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo -e '\x56\x6a'; true ; } > /tmp/a1/151.161.3.78
+            echo "name=verify-end-to-end-docker-image lines=$(wc -l </tmp/a1/151.161.3.78)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '151.161.3.78'
+  verify-end-to-end-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  allCosts:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo 'lorem ipsum dolor sit amet' | sed s/dolor/hand/; true ; } > /tmp/a1/81f1be2ca352fb05ae5680138499e697257fd2f
+            echo "name=ensure-full-regression-suite lines=$(wc -l </tmp/a1/81f1be2ca352fb05ae5680138499e697257fd2f)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '81f1be2ca352fb05ae5680138499e697257fd2f'
+  ensure-full-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/81f1be2ca352fb05ae5680138499e697257fd2f 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  view_2015_02:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: scp db dump 51
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; top -b -n 1 -u $(whoami) | head -n11; true ; } > /tmp/a1/GmEtVgf
+            echo "name=andromeda lines=$(wc -l </tmp/a1/GmEtVgf)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'GmEtVgf'
+  andromeda:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/GmEtVgf 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  SHARD_KEY:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Gc each night
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; printf 'a\n\n\nb\n' >"/tmp/tmp-spi.log" && cat -E "/tmp/tmp-spi.log"; true ; } > /tmp/a1/access.log
+            echo "name=Verify_Image6 lines=$(wc -l </tmp/a1/access.log)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'access.log'
+  Verify_Image6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  done7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: CMP eval harness held out set
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; for val in {1..6..2} ; do echo "$val"; done | sort -r; true ; } > /tmp/a1/oTtErdRAfTCEDaR
+            echo "name=node20-release lines=$(wc -l </tmp/a1/oTtErdRAfTCEDaR)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'oTtErdRAfTCEDaR'
+  node20-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/oTtErdRAfTCEDaR 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  asyncShaderDestroyMossQuick:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: REPAIR BILLING RECORDS
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -n / | tail -n +2 | head -n 4; true ; } > /tmp/a1/build-2500
+            echo "name=vb-x lines=$(wc -l </tmp/a1/build-2500)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'build-2500'
+  vb-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/build-2500 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  tax-small_class:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Backend team bucket late arrivals
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; for k in set buffer bundle; do echo $k | rev; done | tac; true ; } > /tmp/a1/a6f69dfd57ebaf7b0e811
+            echo "name=vera-test lines=$(wc -l </tmp/a1/a6f69dfd57ebaf7b0e811)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'a6f69dfd57ebaf7b0e811'
+  vera-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/a6f69dfd57ebaf7b0e811 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  sys_OptionId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Blame the sampler
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; sed 's/:.*//' </etc/group|awk '{print length, $0}'; true ; } > /tmp/a1/IMG00041817
+            echo "name=v1-edge lines=$(wc -l </tmp/a1/IMG00041817)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'IMG00041817'
+  v1-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/IMG00041817 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  Pa5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Wilco checkpoint the slow query log
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; sleep 0.5 && echo 'time is up'; true ; } > /tmp/a1/DSC_00048858
+            echo "name=pat-verify lines=$(wc -l </tmp/a1/DSC_00048858)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'DSC_00048858'
+  pat-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/DSC_00048858 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  ct4xazwi55196:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: packAchievementsTask
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -type f -name 'os-release' -links +1 -exec head -n 1 {} \; 2>/dev/null | xargs -r ls -ld | head -n 5; true ; } > /tmp/a1/fnv_99372190b1d4f
+            echo "name=rm-router-leak lines=$(wc -l </tmp/a1/fnv_99372190b1d4f)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'fnv_99372190b1d4f'
+  rm-router-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  sanitizeWithTax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: SEED ENEMY WAVES MANUAL
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -S /usr/share/doc | cat -n; true ; } > /tmp/a1/exp8_4094
+            echo "name=go1-21-vet lines=$(wc -l </tmp/a1/exp8_4094)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'exp8_4094'
+  go1-21-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/exp8_4094 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  blog-email-text:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: harden trust store first
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; for i in tuesday sunday saturday monday; do echo ${i} | rev; done | wc -l; true ; } > /tmp/a1/ZaEM3fw
+            echo "name=rc-v9 lines=$(wc -l </tmp/a1/ZaEM3fw)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'ZaEM3fw'
+  rc-v9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/ZaEM3fw 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  js-input-link:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Post the year end pack fy26
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; (trap "echo cleaning up" EXIT; echo "what's next?"); true ; } > /tmp/a1/525vq
+            echo "name=mike-4 lines=$(wc -l </tmp/a1/525vq)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '525vq'
+  mike-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/525vq 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  Plugin-Form-Total:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -Q1d --dereference-command-line /tmp | tail -n 10; true ; } > /tmp/a1/cfg.ux.env
+            echo "name=smoke lines=$(wc -l </tmp/a1/cfg.ux.env)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'cfg.ux.env'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/cfg.ux.env 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  servoHdl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Culturing budget 15 ms
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; find ~ -maxdepth 1 | sort | uniq -c | wc -w; true ; } > /tmp/a1/4.123.96
+            echo "name=node20-vet lines=$(wc -l </tmp/a1/4.123.96)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '4.123.96'
+  node20-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/4.123.96 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  PUBLIC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Maintenance mode is woken by the script
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls --reverse /srv | awk 'NR % 3 == 0'; true ; } > /tmp/a1/2018-03-17T05-38
+            echo "name=sirius-beta lines=$(wc -l </tmp/a1/2018-03-17T05-38)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '2018-03-17T05-38'
+  sirius-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/2018-03-17T05-38 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  heigth:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: reroute peering link in beta
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; sha512sum /etc/group > ${TMPDIR:-/tmp}/pa0.chk && sha512sum -c ${TMPDIR:-/tmp}/pa0.chk; true ; } > /tmp/a1/fermion.memo.violet
+            echo "name=ensure-partial-artifact-bundle lines=$(wc -l </tmp/a1/fermion.memo.violet)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'fermion.memo.violet'
+  ensure-partial-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/fermion.memo.violet 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  feature-depth-map-tiny:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Ground Battery Level
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -type d -iname 'std*' -exec du -sh {} + 2> /dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/a1/bondMountain
+            echo "name=brodcast lines=$(wc -l </tmp/a1/bondMountain)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'bondMountain'
+  brodcast:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/AJd3oT0 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+  inner-flag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: POP hub world
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; sha256sum <(echo "the quick brown fox"); true ; } > /tmp/a1/LOT-39246-GL
+            echo "name=preview lines=$(wc -l </tmp/a1/LOT-39246-GL)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'LOT-39246-GL'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Snapshot handoff
+          command: |
+            l=$(wc -l < /tmp/a1/LOT-39246-GL 2>/dev/null); echo "popcount approx: $((l | (l>>1)))" || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 3 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prepare source archive
+          command: tar -I bzip2 -xf release-output-stage.tar.bz2
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          name: Package artifacts
+          command: uname -a
+      - run:
+          command: sh -c "./deploy-sink"
+
+  rank_category:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Then we mux the master file
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; grep URL /etc/os-release | sed 's/=.*//' | sort -r; true ; } > /tmp/a1/b30f624fc88668b03abc5fa11
+            echo "name=py311-lint lines=$(wc -l </tmp/a1/b30f624fc88668b03abc5fa11)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'b30f624fc88668b03abc5fa11'
+  step72493:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Contract archival task
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo -n 'step 2 of 5' | b2sum; true ; } > /tmp/a1/a6f69dfd57ebaf7b0e811
+            echo "name=vera-test lines=$(wc -l </tmp/a1/a6f69dfd57ebaf7b0e811)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'a6f69dfd57ebaf7b0e811'
+  elmWhiskey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Chill tier 8
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo yes | tee -a /tmp/my-summary.out >/dev/null && wc -l /tmp/my-summary.out; true ; } > /tmp/a1/2018-03-17T05-38
+            echo "name=sirius-beta lines=$(wc -l </tmp/a1/2018-03-17T05-38)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '2018-03-17T05-38'
+  qCenter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; word='a-b-c'; declare -p word; true ; } > /tmp/a1/cfg.ux.env
+            echo "name=smoke lines=$(wc -l </tmp/a1/cfg.ux.env)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'cfg.ux.env'
+  info988:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: A small reminder
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; find /usr/share -maxdepth 3 -type f \( -name "*.gz" -o -name "README*" \) -exec wc -c {} + 2>/dev/null | wc -l; true ; } > /tmp/a1/IMG00041817
+            echo "name=v1-edge lines=$(wc -l </tmp/a1/IMG00041817)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'IMG00041817'
+  hitAnim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Mandatory unload
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; touch "/tmp/products_v2.dat" && chmod u+x "/tmp/products_v2.dat" && [ -x "/tmp/products_v2.dat" ] && echo executable; true ; } > /tmp/a1/4.123.96
+            echo "name=node20-vet lines=$(wc -l </tmp/a1/4.123.96)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '4.123.96'
+  TOTAL_EMAIL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            set +o pipefail 2>/dev/null; sum_lines() { seq 1 $1 | md5sum ; }; sum_lines 770204 > /tmp/a1/0b7a340a-8014-4d33; true
+            echo "name=artifacts lines=$(wc -l </tmp/a1/0b7a340a-8014-4d33)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '0b7a340a-8014-4d33'
+  depthType:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: The holiday calendar is live
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; seq 134|awk '{print $1, $1*$1}'|tail -3; true ; } > /tmp/a1/DSC_00048858
+            echo "name=pat-verify lines=$(wc -l </tmp/a1/DSC_00048858)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'DSC_00048858'
+  fe-f5-b6-54:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: AUG SCREENSHOT RUN
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo 'ok' | gzip -c | wc -c; true ; } > /tmp/a1/pQho
+            echo "name=fiona-ship lines=$(wc -l </tmp/a1/pQho)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'pQho'
+  Dict_copy-texture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Quickly hot swap the solar inverter
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ln -sf /usr/bin/env "/tmp/peach-cluster-2024.10.09.md" && readlink -f "/tmp/peach-cluster-2024.10.09.md"; true ; } > /tmp/a1/GmEtVgf
+            echo "name=andromeda lines=$(wc -l </tmp/a1/GmEtVgf)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'GmEtVgf'
+  price-set:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Breathe then sort overstock
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; tail -n 1 < /etc/passwd | tr ':' ' ' | wc -l; true ; } > /tmp/a1/ZaEM3fw
+            echo "name=rc-v9 lines=$(wc -l </tmp/a1/ZaEM3fw)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'ZaEM3fw'
+  label_camera_scope_violet:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: qwerty
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,fig,8,88.84\n2,lemon,13,15.45\n3,grape,10,3.35\n4,plum,12,76.32\n' >'/tmp/bear_layout_policy.dat' && awk -F, '$3 > 5' '/tmp/bear_layout_policy.dat'; true ; } > /tmp/a1/shimmerbosonstackred
+            echo "name=tb-alt lines=$(wc -l </tmp/a1/shimmerbosonstackred)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'shimmerbosonstackred'
+  badge_cell:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Rolling back the sidecar hold on
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; cut -d: -f6 /etc/passwd | sort -r | awk -F'/' '{print $NF}' | sort | uniq -c | sort -nr | tr -d '[:digit:]'; true ; } > /tmp/a1/exp8_4094
+            echo "name=go1-21-vet lines=$(wc -l </tmp/a1/exp8_4094)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'exp8_4094'
+  TypedStateItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Skim the holiday calendar
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; grep -Ri --include='*rc' if /etc/skel | head -n3; true ; } > /tmp/a1/xx_4ddda691c5925a
+            echo "name=wip-parse lines=$(wc -l </tmp/a1/xx_4ddda691c5925a)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'xx_4ddda691c5925a'
+  account-7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: part one poll
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo 'up to date' >"/tmp/private.bak" && wc -c <"/tmp/private.bak"; true ; } > /tmp/a1/beamQuickMountain
+            echo "name=all-greens lines=$(wc -l </tmp/a1/beamQuickMountain)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'beamQuickMountain'
+  r_bot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Limit the master file to 45 per minute
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; compgen -b | fmt -w 65 | awk '{print NF}'; true ; } > /tmp/a1/tenant147
+            echo "name=bob-verify lines=$(wc -l </tmp/a1/tenant147)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'tenant147'
+  osqwusO:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: VERIFY SBOM
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=9969\nuser=omar\ndebug=false\n' > '/dev/shm/limit.dat' && grep -c = '/dev/shm/limit.dat'; true ; } > /tmp/a1/oTtErdRAfTCEDaR
+            echo "name=node20-release lines=$(wc -l </tmp/a1/oTtErdRAfTCEDaR)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'oTtErdRAfTCEDaR'
+  server_2002_11:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Hover over the back button
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls -chi | sed -n '1~2p'; true ; } > /tmp/a1/build-2500
+            echo "name=vb-x lines=$(wc -l </tmp/a1/build-2500)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'build-2500'
+  Dismount-TextObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Inspect pipette tips batch 26
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; ls /etc/skel | awk '{print length, $0}' | sort -n | tail -n 3; true ; } > /tmp/a1/LOT-39246-GL
+            echo "name=preview lines=$(wc -l </tmp/a1/LOT-39246-GL)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'LOT-39246-GL'
+  needs_box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: done summarizing vendor
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; echo 'first line' | tee '/tmp/contract_billing_final.csv' '/tmp/new_manual_ant.copy' >/dev/null && cat '/tmp/new_manual_ant.copy'; true ; } > /tmp/a1/525vq
+            echo "name=mike-4 lines=$(wc -l </tmp/a1/525vq)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '525vq'
+  sleepASCII:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: patch order 6
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; for file in /etc/s*; do echo $file; done | head -n3; true ; } > /tmp/a1/964b2dbf81bec5ea842055c92
+            echo "name=xi-push lines=$(wc -l </tmp/a1/964b2dbf81bec5ea842055c92)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '964b2dbf81bec5ea842055c92'
+  Write-Arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage4 fixture
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; printf '%s\n' "won't fix" | md5sum; true ; } > /tmp/a1/81f1be2ca352fb05ae5680138499e697257fd2f
+            echo "name=ensure-full-regression-suite lines=$(wc -l </tmp/a1/81f1be2ca352fb05ae5680138499e697257fd2f)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - '81f1be2ca352fb05ae5680138499e697257fd2f'
+  aquax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: invoicing LIVE
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; fold -w 28 /etc/login.defs | wc -w; true ; } > /tmp/a1/gVtYdY39Io
+            echo "name=APP-446 lines=$(wc -l </tmp/a1/gVtYdY39Io)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'gVtYdY39Io'
+  Payment-Session:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/a1
+      - run:
+          name: Round IV Congrats
+          command: |
+            mkdir -p /tmp/a1
+            { set +o pipefail 2>/dev/null; touch "/tmp/test-host-ticket-mount.md" && cp "/tmp/test-host-ticket-mount.md"{,.bak} && ls "/tmp/test-host-ticket-mount.md"*; true ; } > /tmp/a1/fermion.memo.violet
+            echo "name=ensure-partial-artifact-bundle lines=$(wc -l </tmp/a1/fermion.memo.violet)"
+      - persist_to_workspace:
+          root: /tmp/a1
+          paths:
+            - 'fermion.memo.violet'
+workflows:
+  run:
+    jobs:
+      - heidibot
+      - rank_category:
+          requires:
+            - heidibot
+      - py311-lint:
+          requires:
+            - rank_category
+      - tax-small_class:
+          requires:
+            - rank_category
+      - step72493:
+          requires:
+            - tax-small_class
+      - vera-test:
+          requires:
+            - step72493
+      - PUBLIC:
+          requires:
+            - step72493
+      - elmWhiskey:
+          requires:
+            - PUBLIC
+      - sirius-beta:
+          requires:
+            - elmWhiskey
+      - Plugin-Form-Total:
+          requires:
+            - elmWhiskey
+      - qCenter:
+          requires:
+            - Plugin-Form-Total
+      - smoke:
+          requires:
+            - qCenter
+      - sys_OptionId:
+          requires:
+            - qCenter
+      - info988:
+          requires:
+            - sys_OptionId
+      - v1-edge:
+          requires:
+            - info988
+      - servoHdl:
+          requires:
+            - info988
+      - hitAnim:
+          requires:
+            - servoHdl
+      - node20-vet:
+          requires:
+            - hitAnim
+      - Date-Span-Mesh:
+          requires:
+            - hitAnim
+      - TOTAL_EMAIL:
+          requires:
+            - Date-Span-Mesh
+      - artifacts:
+          requires:
+            - TOTAL_EMAIL
+      - inputKey
+      - ct4xazwi55196
+      - feature-depth-map-tiny
+      - Prepare_Image1:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - rm-router-leak:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - brodcast:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - Verify_Image6:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - RolloutRelease:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - verify-end-to-end-docker-image:
+          requires:
+            - inputKey
+            - ct4xazwi55196
+            - feature-depth-map-tiny
+      - Pa5
+      - depthType:
+          requires:
+            - Pa5
+      - pat-verify:
+          requires:
+            - depthType
+      - bugfix-warning-attach-last:
+          requires:
+            - depthType
+      - fe-f5-b6-54:
+          requires:
+            - bugfix-warning-attach-last
+      - fiona-ship:
+          requires:
+            - fe-f5-b6-54
+      - view_2015_02:
+          requires:
+            - fe-f5-b6-54
+      - Dict_copy-texture:
+          requires:
+            - view_2015_02
+      - andromeda:
+          requires:
+            - Dict_copy-texture
+      - blog-email-text:
+          requires:
+            - Dict_copy-texture
+      - price-set:
+          requires:
+            - blog-email-text
+      - rc-v9:
+          requires:
+            - price-set
+      - gradient_ref:
+          requires:
+            - price-set
+      - label_camera_scope_violet:
+          requires:
+            - gradient_ref
+      - tb-alt:
+          requires:
+            - label_camera_scope_violet
+      - sanitizeWithTax
+      - badge_cell:
+          requires:
+            - sanitizeWithTax
+      - go1-21-vet:
+          requires:
+            - badge_cell
+      - planet-377:
+          requires:
+            - badge_cell
+      - TypedStateItem:
+          requires:
+            - planet-377
+      - wip-parse:
+          requires:
+            - TypedStateItem
+      - NavWriterGardenTraceEmber:
+          requires:
+            - TypedStateItem
+      - account-7:
+          requires:
+            - NavWriterGardenTraceEmber
+      - all-greens:
+          requires:
+            - account-7
+      - hugo-li-cloud:
+          requires:
+            - account-7
+      - r_bot:
+          requires:
+            - hugo-li-cloud
+      - bob-verify:
+          requires:
+            - r_bot
+      - done7:
+          requires:
+            - r_bot
+      - osqwusO:
+          requires:
+            - done7
+      - node20-release:
+          requires:
+            - osqwusO
+      - asyncShaderDestroyMossQuick:
+          requires:
+            - osqwusO
+      - server_2002_11:
+          requires:
+            - asyncShaderDestroyMossQuick
+      - vb-x:
+          requires:
+            - server_2002_11
+      - inner-flag:
+          requires:
+            - server_2002_11
+      - Dismount-TextObject:
+          requires:
+            - inner-flag
+      - preview:
+          requires:
+            - Dismount-TextObject
+      - js-input-link:
+          requires:
+            - Dismount-TextObject
+      - needs_box:
+          requires:
+            - js-input-link
+      - mike-4:
+          requires:
+            - needs_box
+      - melody85973:
+          requires:
+            - needs_box
+      - sleepASCII:
+          requires:
+            - melody85973
+      - xi-push:
+          requires:
+            - sleepASCII
+      - allCosts:
+          requires:
+            - sleepASCII
+      - Write-Arg:
+          requires:
+            - allCosts
+      - ensure-full-regression-suite:
+          requires:
+            - Write-Arg
+      - hH7:
+          requires:
+            - Write-Arg
+      - aquax:
+          requires:
+            - hH7
+      - APP-446:
+          requires:
+            - aquax
+      - heigth:
+          requires:
+            - aquax
+      - Payment-Session:
+          requires:
+            - heigth
+      - ensure-partial-artifact-bundle:
+          requires:
+            - Payment-Session
